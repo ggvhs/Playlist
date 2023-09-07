@@ -9,8 +9,8 @@ const storage = memoryStorage()
 const upload = multer({storage})
 
 const port = process.env.PORT || 3006
-const accesskey = process.env.accesskey
-const secretAccessKey = process.env
+const accesskey = process.env.ACCESS_KEY_ID
+const secretAccessKey = process.env.SECRET_ACCESS_KEY
 
 const app = express()
 
@@ -30,8 +30,8 @@ app.use(express.urlencoded({extended: flase}))
 //data
 
 const s3 = new AWS.S3({
-    accessKeyId: '',
-    secretAccessKey: ''
+    accessKeyId: `${accesskey}`,
+    secretAccessKey: `${secretAccessKey}`
 })
 
 //* The upload function
