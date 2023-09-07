@@ -7,7 +7,7 @@ const port = process.env.PORT || 3006
 const app = express()
 
 app.get('/api/songs', (req,res) =>{
-    res.send('Get Songs')
+    res.json({message:'Get Songs'})
 })
 
 app.listen(port, () => console.log(`Server started on port ${port}`) )
