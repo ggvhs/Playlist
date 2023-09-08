@@ -1,15 +1,17 @@
+// * imports
 const AWS = require('aws-sdk')
 const dotenv = require('dotenv').config()
 const express = require('express')
 const multer = require('multer')
 
-
+//* Specifying ports
 const port = process.env.PORT || 3006
+
+//* Saving my access keys
 const accesskey = process.env.ACCESS_KEY_ID
 const secretAccessKey = process.env.SECRET_ACCESS_KEY
 
 const app = express()
-
 app.use(express.json())
 app.use(express.urlencoded({extended: false }))
 
@@ -20,6 +22,7 @@ app.use(express.urlencoded({extended: false }))
 //TODO: END OF TODO
 
 
+//! rotues related to the MP3 file man
 //TODO: Implement code below using brads method
 // create a bucket 
 // route post
@@ -58,7 +61,7 @@ const uploadSong = (filename, bucketname, file) =>{
 
 
 app.post('/upload' , upload.single('songfile'), async (req,res) => {
-    const filename = '3rd upload';
+    const filename = '4th upload';
     const bucketname = 'music-uploads-for-playlist';
     const file = req.file.buffer
     console.log('FILE' , file)
