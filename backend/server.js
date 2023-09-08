@@ -4,22 +4,27 @@ const dotenv = require('dotenv').config()
 const express = require('express')
 const multer = require('multer')
 
+
 //* Specifying ports
 const port = process.env.PORT || 3006
+
 
 //* Saving my access keys
 const accesskey = process.env.ACCESS_KEY_ID
 const secretAccessKey = process.env.SECRET_ACCESS_KEY
 
 const app = express()
+//? What is the significance of th express.json and express.url encoded
 app.use(express.json())
 app.use(express.urlencoded({extended: false }))
 
-// TODO:  GO BACK TO BRAD'S VID 15:17
-// app.get('/api/songs', (req,res) =>{
-//     res.json({message:'Get Songs'})
-// })
-//TODO: END OF TODO
+
+//* These are my routes for my mongoDB operations
+
+app.get('/api/songs', (req,res) =>{
+    res.status(200).json({message:'Get Songs'})
+})
+
 
 
 //! rotues related to the MP3 file man
