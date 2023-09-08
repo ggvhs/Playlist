@@ -21,9 +21,7 @@ app.use(express.urlencoded({extended: false }))
 app.use('/api/songs', require('./routes/songRoutes'))
 
 
-//! rotues related to the MP3 file man
-//TODO: Implement code below using brads method
-
+//! rotues related to the MP3 file 
 const upload = multer({ storage: multer.memoryStorage() });
 
 
@@ -38,6 +36,9 @@ app.post('/upload' , upload.single('songfile'), async (req,res) => {
 })
 
 
-//TODO: end of TODO
 
+
+
+
+//Port listener
 app.listen(port, () => console.log(`Server started on port ${port}`) )
