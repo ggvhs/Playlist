@@ -16,12 +16,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false }))
 
 
-//* These are my routes for my mongoDB operations
 
+//* These are my routes for my mongoDB operations
 app.use('/api/songs', require('./routes/songRoutes'))
 
 
-//! rotues related to the MP3 file 
+//* POST / DELETE route for aws operations
 const upload = multer({ storage: multer.memoryStorage() });
 
 

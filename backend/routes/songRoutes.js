@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const {getSongs} = require('../controllers/songController')
 
-router.get('/', (req,res) =>{
-    res.status(200).json({message:'Get Songs'})
-})
+router.get('/', getSongs)
+
 router.post('/', (req,res) =>{
     res.status(200).json({message:'Set Songs'})
 })
