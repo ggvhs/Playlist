@@ -1,12 +1,8 @@
-
 const AWS = require('aws-sdk')
 const dotenv = require('dotenv').config()
 const express = require('express')
 const multer = require('multer')
 
-const { memoryStorage } = require('multer')
-const storage = memoryStorage()
-const upload = multer({storage})
 
 const port = process.env.PORT || 3006
 const accesskey = process.env.ACCESS_KEY_ID
@@ -15,7 +11,7 @@ const secretAccessKey = process.env.SECRET_ACCESS_KEY
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({extended: flase}))
+app.use(express.urlencoded({extended: false }))
 
 // TODO:  GO BACK TO BRAD'S VID 15:17
 // app.get('/api/songs', (req,res) =>{
@@ -34,31 +30,41 @@ const s3 = new AWS.S3({
     secretAccessKey: `${secretAccessKey}`
 })
 
+
+const upload = multer({ storage: multer.memoryStorage() });
 //* The upload function
-const uploadSong = () =>{
+const uploadSong = (filename, bucketname, file) =>{
 
-    const params ={
-        Key: filename,
-        Busket: bucketname,
-        Body: file,
-        ContentType: ';audio/mpeg',
-        ACL: 'public-read'
-    }
-
-
-    s3.upload(params, (error,data)=>{
-        if(error){
-            return
-        }else{
-            return (data)
+    return new Promise((resolve, reject) =>{
+        const params ={
+            Key: filename,
+            Bucket: bucketname,
+            Body: file,
+            ContentType: 'audio/mpeg',
+            ACL: 'public-read'
+            
         }
+    
+    
+        s3.upload(params, (error,data)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve (data.Location)
+            }
+        })
     })
 }
 
-const bucket = 'music-uploads-for-playlist'
 
-app.post('/upload' , (req,res) => {
-    console.log('uploaded sucessfully ...')
+app.post('/upload' , upload.single('songfile'), async (req,res) => {
+    const filename = '3rd upload';
+    const bucketname = 'music-uploads-for-playlist';
+    const file = req.file.buffer
+    console.log('FILE' , file)
+    const link = await uploadSong(filename, bucketname, file)
+    console.log(link)
+    res.send('uploaded successfully...')
 })
 //TODO: end of TODO
 
