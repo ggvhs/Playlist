@@ -2,9 +2,14 @@
 const AWS = require('aws-sdk')
 const dotenv = require('dotenv').config()
 const {errorHandler} = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
 const express = require('express')
 const multer = require('multer')
 const uploadSong = require('./aws')
+
+
+//* Calling the function the connects the db
+connectDB()
 
 
 //* Specifying ports
