@@ -1,5 +1,6 @@
 // * imports
 const AWS = require('aws-sdk')
+const s3 = new AWS.S3();
 const dotenv = require('dotenv').config()
 const {errorHandler} = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
@@ -22,6 +23,14 @@ const app = express()
 //? What is the significance of th express.json and express.url encoded
 app.use(express.json())
 app.use(express.urlencoded({extended: false }))
+
+
+// Configure AWS SDK using environment variables
+AWS.config.update({
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+  });
 
 
 
@@ -74,6 +83,36 @@ app.get('/list' , async (req, res) => {
     } catch (error){
         console.error('Error retrieving MP3 list:', error);
         res.status(500).send('Error retrieving MP3 list.')
+    }
+})
+
+
+app.delete('/mp3/:id', async (req,res) => {
+    try {
+        const mp3Id = req.params.id;
+
+        // Find the MP3 document by its ObjectId
+        const mp3 = await Mp3.findById(mp3Id)
+
+        if (!mp3) {
+            return res.status(404).send('MP3 file not found.');
+          }
+
+        const deleteParams = {
+            Bucket: 'music-uploads-for-playlist',
+            Key: mp3.filename,
+          };
+
+        await s3.deleteObject(deleteParams).promise();
+
+        // Remove the MP3 document from MongoDB using deleteOne
+        await Mp3.deleteOne({ _id: mp3Id })
+
+        res.send('MP3 file deleted sucessfully.')
+    } catch (error) {
+        console.error('Error deleting MP3 file:', error);
+        res.status(500).send('Error deleting MP3 file.');
+        
     }
 })
 
