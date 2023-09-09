@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler')
 
+const Goal = require('../models/songModel')
+
 
 //@description  Get songs
 //@route        Get /api/songs
