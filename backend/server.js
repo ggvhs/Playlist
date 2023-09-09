@@ -1,6 +1,7 @@
 // * imports
 const AWS = require('aws-sdk')
 const dotenv = require('dotenv').config()
+const {errorHandler} = require('./middleware/errorMiddleware')
 const express = require('express')
 const multer = require('multer')
 const uploadSong = require('./aws')
@@ -38,7 +39,8 @@ app.post('/upload' , upload.single('songfile'), async (req,res) => {
 
 
 
-
+//using error handler
+app.use(errorHandler)
 
 //Port listener
 app.listen(port, () => console.log(`Server started on port ${port}`) )
