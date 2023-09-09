@@ -63,7 +63,19 @@ app.post('/upload' , upload.single('songfile'), async (req,res) => {
  
 })
 
+app.get('/list' , async (req, res) => {
+    try{
+        //Query the MongoDB database to retrive a list of MP3 files
+        const mp3List = await Mp3.find();
 
+
+        //send the list in json
+        res.json(mp3List);
+    } catch (error){
+        console.error('Error retrieving MP3 list:', error);
+        res.status(500).send('Error retrieving MP3 list.')
+    }
+})
 
 
 //using error handler
