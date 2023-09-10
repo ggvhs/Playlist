@@ -1,13 +1,14 @@
 const asyncHandler = require('express-async-handler')
 
-const Goal = require('../models/songModel')
+const Song = require('../models/songModel')
 
 
 //@description  Get songs
 //@route        Get /api/songs
 //@access       Private
 const getSongs = asyncHandler( async (req,res) => {
-    res.status(200).json({message:'Get Songs'})
+    const songs = await Song.find()
+    res.status(200).json(songs)
 })
 
 

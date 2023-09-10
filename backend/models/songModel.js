@@ -2,10 +2,14 @@ const mongoose = require('mongoose')
 
 const songSchema = mongoose.Schema(
     {
-        text: {
+        songName: {
             type: String,
-            required: [true, 'Please add a Artist Name'],
+            required: [true, 'Please add a Song Name'],
         },
+        artistName: {
+            type:String,
+            required: [true, 'Please add an Artist Name']
+        }
     },
     {
         timestamps:true,
@@ -13,4 +17,4 @@ const songSchema = mongoose.Schema(
 )
 
 
-module.exports = mongoose.model('Goal', songSchema)
+module.exports = mongoose.model('Song', songSchema)

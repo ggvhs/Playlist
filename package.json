@@ -10,6 +10,7 @@
   "author": "ggvhs",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.409.0",
     "aws-sdk": "^2.1452.0",
     "colors": "^1.4.0",
     "dotenv": "^16.3.1",
