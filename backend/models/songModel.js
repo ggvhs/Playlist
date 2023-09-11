@@ -1,7 +1,12 @@
 const mongoose = require('mongoose')
 
 const songSchema = mongoose.Schema(
-    {
+    {   
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
         songName: {
             type: String,
             required: [true, 'Please add a Song Name'],
