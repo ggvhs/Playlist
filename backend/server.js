@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended: false }))
 
 //* These are my routes for my mongoDB operations
 app.use('/api/songs', require('./routes/songRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 
 
