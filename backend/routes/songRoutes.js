@@ -2,8 +2,10 @@ const express = require('express')
 const router = express.Router()
 const {getSongs , setSong , updateSong, deleteSong} = require('../controllers/songController')
 
-router.route('/').get(getSongs).post(setSong)
-router.route('/:id').delete(deleteSong).put(updateSong)
+const {protect} = require('../middleware/authMiddleware')
+
+router.route('/').get(protect, getSongs).post(protect , setSong)
+router.route('/:id').delete(protect, deleteSong).put(protect, updateSong)
 
 
 
