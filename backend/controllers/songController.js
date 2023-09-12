@@ -1,13 +1,14 @@
 const asyncHandler = require('express-async-handler')
 
 const Song = require('../models/songModel')
+const User = require('../models/userModel')
 
 
 //@description  Get songs
 //@route        Get /api/songs
 //@access       Private
 const getSongs = asyncHandler( async (req,res) => {
-    const songs = await Song.find()
+    const songs = await Song.find({ user: req.user.id})
     res.status(200).json(songs)
 })
 
@@ -23,7 +24,8 @@ const setSong = asyncHandler(async (req,res) => {
 
     const song = await Song.create({
         songName: req.body.songName,
-        artistName: req.body.artistName
+        artistName: req.body.artistName,
+        user: req.user.id
     }) 
     res.status(200).json(song)
 })
@@ -40,9 +42,23 @@ const updateSong = asyncHandler(async (req,res) => {
         throw new Error('Song not found')
     }
 
-    const updataedGoal = await Song.findByIdAndUpdate(req.params.id,req.body,{new: true,})
+    const user = await User.findById(req.user.id)
 
-    res.status(200).json(updataedGoal)
+    // Check for user
+    if(!user){
+        res.status(401)
+        throw new Error ('User not found')
+    }
+
+    //Make sure the logged in user matches the goal user
+    if(song.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    const updataedSong = await Song.findByIdAndUpdate(req.params.id,req.body,{new: true,})
+
+    res.status(200).json(updataedSong)
 })
 
 
@@ -55,6 +71,20 @@ const deleteSong = asyncHandler(async (req,res) => {
     if(!song) {
         res.status(400)
         throw new Error('Song not found')
+    } 
+
+    const user = await User.findById(req.user.id)
+
+    // Check for user
+    if(!user){
+        res.status(401)
+        throw new Error ('User not found')
+    }
+
+    //Make sure the logged in user matches the goal user
+    if(song.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('User not authorized')
     }
 
     
