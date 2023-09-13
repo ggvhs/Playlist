@@ -8,12 +8,12 @@ function Header() {
         </div>
         <ul>
             <li>
-                <Link>
+                <Link to='/login'>
                     Login
                 </Link>
             </li>
             <li>
-                <Link>
+                <Link to='/register'>
                     Register
                 </Link>
             </li>
