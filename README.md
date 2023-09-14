@@ -11,10 +11,11 @@ This is a full C.R.U.D. playlist application (create,read,update, and delete)
 - HTML
 - CSS
 - Javascript
+- redux
 
 ## Getting Started
 
-![Photo](Screenshot 2023-09-14 011013.jpg)
+![Photo](Site.png)
 
 
 
