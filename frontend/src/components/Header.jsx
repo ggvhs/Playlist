@@ -19,28 +19,28 @@ function Header() {
       <div className='logo'>
         <Link to='/'>Playlister</Link>
       </div>
-      <ul>
+      <>
         {user ? (
-          <li>
+          
             <button className='btn' onClick={onLogout}>
                Logout
             </button>
-          </li>
+          
         ) : (
           <>
-            <li>
+            <p>
               <Link to='/login'>
                  Login
               </Link>
-            </li>
-            <li>
+            </p>
+            <p>
               <Link to='/register'>
                  Register
               </Link>
-            </li>
+            </p>
           </>
         )}
-      </ul>
+      </>
     </header>
   )
 }

@@ -1,0 +1,23 @@
+*{
+    background-color: black;
+    color: white;
+}
+
+button{
+    outline: none;
+    border: none;
+}
+
+input{
+    outline: none;
+    border: 1px dotted white;
+    border-radius: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header{
+    text-align: center;
+}
