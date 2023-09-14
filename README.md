@@ -14,7 +14,7 @@ This is a full C.R.U.D. playlist application (create,read,update, and delete)
 
 ## Getting Started
 
-D:\projects\Playlist\Screenshot 2023-09-14 011013.png
+![ALT photo](D:\projects\Playlist\Screenshot 2023-09-14 011013.png)
 
 
 
