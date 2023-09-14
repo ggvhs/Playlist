@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector , useDispatch} from "react-redux";
 import SongForm from "../components/SongForm";
-// import SongItem from "../components/SongItem";
+import SongItem from "../components/SongItem";
 import Spinner from '../components/Spinner'
 import {getSongs , reset} from '../features/songs/songSlice'
 
@@ -44,7 +44,7 @@ function Dashboard() {
       </section>
       <SongForm />
 
-      {/* <section className="content">
+      <section className="content">
         {songs.length > 0 ? (
           <div className="songs">
             {songs.map((song) =>(
@@ -52,7 +52,7 @@ function Dashboard() {
             ))}
           </div>
         ) : (<h3>You have not set any songs</h3>)}
-      </section> */}
+      </section>
     </>
   );
 }
