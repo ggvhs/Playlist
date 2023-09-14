@@ -66,7 +66,7 @@ function Login() {
         <h1>
            Login
         </h1>
-        <p>Login in and start setting goals</p>
+        <p>Login in and start adding songs</p>
       </section>
 
       <section className='form'>
