@@ -14,7 +14,7 @@ This is a full C.R.U.D. playlist application (create,read,update, and delete)
 
 ## Getting Started
 
-![Photo](Screenshot 2023-09-14 011013.png)
+![Photo](Screenshot 2023-09-14 011013.jpg)
 
 [Trello]: https://trello.com/invite/b/Ymsq6Eav/ATTI2f2a103c03be53ef2ee06adf149282a336F8E57A/mod-3
 
